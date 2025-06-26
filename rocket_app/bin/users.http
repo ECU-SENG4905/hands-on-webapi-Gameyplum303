@@ -1,0 +1,39 @@
+### GET ALL users
+GET http://localhost:8080/api/users
+Accept: application/json
+
+###
+
+### GET ONE user 
+GET http://localhost:8080/api/users/1
+Accept: application/json
+
+###
+
+### POST a new user
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "Zed",
+  "email": "zed@example.com",
+  "active": true
+}
+
+###
+
+### PUT update user 
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+  "name": "Zed Updated",
+  "email": "zed_updated@example.com",
+  "active": false
+}
+
+###
+
+### DELETE user by ID (should return 0 or 1)
+DELETE http://localhost:8080/api/users/1
+Accept: application/json

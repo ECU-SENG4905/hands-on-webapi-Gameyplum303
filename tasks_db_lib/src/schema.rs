@@ -35,9 +35,4 @@ diesel::joinable!(user_tasks -> task_statuses (task_status_id));
 diesel::joinable!(user_tasks -> tasks (task_id));
 diesel::joinable!(user_tasks -> users (user_id));
 
-diesel::allow_tables_to_appear_in_same_query!(
-    task_statuses,
-    tasks,
-    user_tasks,
-    users,
-);
+diesel::allow_tables_to_appear_in_same_query!(task_statuses, tasks, user_tasks, users,);
