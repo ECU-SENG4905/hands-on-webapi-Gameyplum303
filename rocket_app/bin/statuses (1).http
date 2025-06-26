@@ -1,0 +1,24 @@
+### Get all task statuses
+GET http://localhost:8080/api/statuses
+
+### Get task status by ID
+GET http://localhost:8080/api/statuses/1
+
+### Create a new task status
+POST http://localhost:8080/api/statuses
+Content-Type: application/json
+
+{
+  "status_name": "Blocked"
+}
+
+### Update a task status
+PUT http://localhost:8080/api/statuses/1
+Content-Type: application/json
+
+{
+  "status_name": "Revised Status Name"
+}
+
+### Delete a task status
+DELETE http://localhost:8080/api/statuses/1

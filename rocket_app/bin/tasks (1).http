@@ -1,0 +1,24 @@
+### Get all tasks
+GET http://localhost:8080/api/tasks
+
+### Get task by ID
+GET http://localhost:8080/api/tasks/1
+
+### Create a new task
+POST http://localhost:8080/api/tasks
+Content-Type: application/json
+
+{
+  "task_name": "New Task"
+}
+
+### Update a task
+PUT http://localhost:8080/api/tasks/1
+Content-Type: application/json
+
+{
+  "task_name": "Updated Task Name"
+}
+
+### Delete a task
+DELETE http://localhost:8080/api/tasks/1

@@ -115,20 +115,26 @@ impl<'a> CrudOperations<SqliteConnection, i32, NewTaskStatus<'a>, TaskStatus> fo
 
 
 impl CrudOperations<SqliteConnection, (i32, i32), NewUserTask, UserTask> for UserTask {
-    fn create(conn: &mut SqliteConnection, new_user_task: NewUserTask) -> anyhow::Result<UserTask> {
-        let user_task = diesel::insert_into(user_tasks::table)
-            .values(&new_user_task)
-            .returning(UserTask::as_returning())
-            .get_result(conn)?;
-        Ok(user_task)
+    fn create(conn: &mut SqliteConnection, new: NewUserTask) -> anyhow::Result<UserTask> {
+        use crate::schema::user_tasks;
+
+        diesel::insert_into(user_tasks::table)
+            .values(&new)
+            .execute(conn)?;
+
+        Self::read(conn, (new.user_id, new.task_id))?
+            .ok_or_else(|| anyhow::anyhow!("Failed to retrieve inserted UserTask"))
     }
 
     fn read(conn: &mut SqliteConnection, id: (i32, i32)) -> anyhow::Result<Option<UserTask>> {
-        let user_task = user_tasks::table
-            .filter(user_tasks::user_id.eq(id.0))
-            .filter(user_tasks::task_id.eq(id.1))
-            .first(conn)
+        use crate::schema::user_tasks::dsl::*;
+
+        let user_task = user_tasks
+            .filter(user_id.eq(id.0))
+            .filter(task_id.eq(id.1))
+            .first::<UserTask>(conn)
             .optional()?;
+
         Ok(user_task)
     }
 

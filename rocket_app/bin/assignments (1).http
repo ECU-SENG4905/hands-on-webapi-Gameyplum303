@@ -1,0 +1,28 @@
+### Get all assignments
+GET http://localhost:8080/api/assignments
+
+### Get assignment by user and task ID
+GET http://localhost:8080/api/assignments/1/2
+
+### Create a new assignment
+POST http://localhost:8080/api/assignments
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "task_id": 2,
+  "task_status_id": 1
+}
+
+### Update an assignment
+PUT http://localhost:8080/api/assignments/1/2
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "task_id": 2,
+  "task_status_id": 2
+}
+
+### Delete an assignment
+DELETE http://localhost:8080/api/assignments/1/2
